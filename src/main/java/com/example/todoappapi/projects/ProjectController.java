@@ -26,7 +26,7 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{id}")
-    public ProjectDto findAProjectById(Integer id){
+    public ProjectDto findAProjectById(@PathVariable Integer id){
         return projectService.findById(id);
     }
 
@@ -42,6 +42,14 @@ public class ProjectController {
             @PathVariable Integer id
     ){
         projectService.deleteProject(id);
+    }
+
+    @PostMapping("/projects/{id}")
+    public ProjectDto updateProject(
+            @PathVariable Integer id,
+            @RequestBody ProjectDto dto
+    ){
+    return  projectService.updateProject(id,dto);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

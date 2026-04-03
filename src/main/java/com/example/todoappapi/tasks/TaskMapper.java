@@ -18,17 +18,23 @@ public class TaskMapper {
         return task;
     }
 
-    public TaskResponseDto toTaskResponseDto(Task task){
-        if (task == null){
+    public TaskResponseDto toTaskResponseDto(Task task) {
+        if (task == null) {
             return null;
         }
+
+        Integer projectId = null;
+        if (task.getProject() != null) {
+            projectId = task.getProject().getId();
+        }
+
         return new TaskResponseDto(
                 task.getId(),
                 task.getTitle(),
                 task.getDescription(),
                 task.getDueDate(),
                 task.getCompleted(),
-                task.getProject().getId() != null ? task.getProject().getId() :null
+                projectId
         );
     }
 

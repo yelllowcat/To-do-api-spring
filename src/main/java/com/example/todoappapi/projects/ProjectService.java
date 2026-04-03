@@ -41,4 +41,12 @@ public class ProjectService {
         projectRepository.deleteById(id);
     }
 
+    public ProjectDto updateProject(Integer id, ProjectDto dto){
+        var project = projectMapper.toProject(dto);
+        project.setId(id);
+        project.setName(dto.name());
+        projectRepository.save(project);
+        return projectMapper.toProjectDto(project);
+    }
+
 }

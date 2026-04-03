@@ -55,13 +55,14 @@ public class TaskService {
     }
 
     public TaskResponseDto updateTask(Integer id,TaskDto dto){
-        Task task = mapper.toTask(dto);
+        var task = mapper.toTask(dto);
+        task.setId(id);
         task.setTitle(dto.title());
         task.setDescription(dto.description());
         task.setDueDate(dto.dueDate());
         task.setCompleted(dto.isCompleted());
-
-        return  mapper.toTaskResponseDto(task);
+        taskRepository.save(task);
+        return mapper.toTaskResponseDto(task);
     }
 
 }
